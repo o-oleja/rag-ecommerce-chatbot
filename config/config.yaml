@@ -1,0 +1,57 @@
+# Конфигурация RAG системы для интернет-магазина
+
+# Настройки обработки знаний (модуль 2)
+knowledge_processing:
+  chunk_size: 500
+  chunk_overlap: 50
+  embedding_model: "text-embedding-3-small"
+  vector_db_type: "pickle"  # может быть "pickle" или "memory"
+  vector_db_path: "vector_db.pkl"
+  similarity_function: "cosine"
+
+# Настройки обработки запросов (модуль 3)
+query_processing:
+  llm_model: "gpt-4o-mini-2024-07-18"
+  embedding_model: "text-embedding-3-small"  # должна совпадать с knowledge_processing
+  top_k_results: 3
+  max_context_length: 1500
+  system_prompt: |
+    Вы - помощник службы поддержки интернет магазина. 
+    Отвечайте на вопросы клиентов на основе предоставленной информации.
+    Будьте вежливы, информативны и точны.
+    Если информации недостаточно, честно скажите об этом.
+  user_prompt_template: |
+    Контекст из базы знаний:
+    {context}
+    
+    Вопрос клиента: {question}
+    
+    Ответьте на вопрос клиента, используя информацию из контекста.
+  evaluation_prompt: |
+    Оцените качество ответа на вопрос клиента по шкале от 0 до 10.
+    
+    Критерии оценки:
+    - Релевантность ответа вопросу (0-4 балла)
+    - Полнота ответа (0-3 балла)  
+    - Точность информации (0-3 балла)
+    
+    Вопрос: {question}
+    Контекст: {context}
+    Ответ: {answer}
+    
+    Верните только число от 0 до 10.
+
+# Настройки OpenAI API
+openai:
+  api_key: "${OPENAI_API_KEY}"
+  timeout: 30
+  temperature: 0
+
+# Настройки данных
+data:
+  qa_file_path: "ecommerce_qa.json"
+  
+# Настройки логирования
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s" 

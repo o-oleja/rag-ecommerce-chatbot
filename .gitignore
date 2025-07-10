@@ -20,27 +20,70 @@ wheels/
 .installed.cfg
 *.egg
 
-# Векторная база (кеш) - будет создаваться автоматически
-vector_db.pkl
-
-# API ключи и конфиденциальная информация
+# Environment variables
 .env
-*.key
+.env.local
+.env.production
+.env.staging
+*.env
 
-# IDE файлы
+# API Keys and secrets
+config/secrets.yaml
+config/api_keys.yaml
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+.ENV
+
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# Операционная система
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+logs/
+rag_system.log
+
+# Vector databases and models
+*.pkl
+*.db
+*.sqlite
+vector_db.pkl
+embeddings_cache/
+
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
-# Логи
-*.log
-
-# Временные файлы
+# Temporary files
 *.tmp
-*.temp 
+*.temp
+temp/
+tmp/
+
+# PyCharm
+.idea/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json 
